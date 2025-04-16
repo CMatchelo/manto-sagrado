@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #251f37;
+    --foreground: #ededed;
+  }
+}
+
+@theme {
+  --color-accent: #F59E0B;
+  --color-danger: #EF4445;
+  --color-primary-1: #FF8C00;
+  --color-primary-dark: #cc7102;
+  --color-primary-light: #ffca89;
+  --color-secondary-1: #F0F8EA;
+  --color-terciary-1: #044389;
+  --color-custom-dark: #191308;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileOnly {
+    display: block;
+  }
+}
+
+/*
+orange -   --color-primary-1: #FF8C00;
+gree - 2F4538
+'royal-blue': '#002366',
+          'gold': '#FFD700',
+          'platinum-1': '#E0E0E0',
+  */
