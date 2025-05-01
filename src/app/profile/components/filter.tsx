@@ -71,7 +71,6 @@ const Filter = ({ jerseyCollection, filterSearch }: FilterProps) => {
             <button onClick={() => filterSearch(filter)}>
                 Aplicar
             </button>
-            <h1 className="text-2xl">Qualquer coisa</h1>
         </div>
     )
 }
