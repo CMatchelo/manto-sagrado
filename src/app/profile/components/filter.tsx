@@ -13,8 +13,8 @@ const Filter = ({ jerseyCollection, filterSearch }: FilterProps) => {
     const [listCountry, setListCountry] = useState<string[]>([])
 
     useEffect(() => {
-        let arrFocus: string[] = []
-        let arrCountry: string[] = []
+        const arrFocus: string[] = []
+        const arrCountry: string[] = []
         jerseyCollection.map((jersey) => {
             if (jersey.focus && !arrFocus.includes(jersey.focus)) arrFocus.push(jersey.focus)
             if (jersey.country && !arrCountry.includes(jersey.country)) arrCountry.push(jersey.country)

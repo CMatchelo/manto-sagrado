@@ -3,7 +3,6 @@ const { i18n } = require('./next-i18next.config');
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: ['lh3.googleusercontent.com'], // Para avatares do Google
   },
