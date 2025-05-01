@@ -9,7 +9,7 @@ interface JerseyCardProps {
 const JerseyCard = ({ jersey, onJerseyClick }: JerseyCardProps) => {
 
     return (
-        <div className="flex flex-col items-center relative px-4 pt-2 
+        <div className="flex flex-col items-center relative px-2 pt-2 
             bg-secondary-1 shadow-2xl border-1 border-primary-1 rounded-md">
             <h2 className="font-semibold text-lg sm:text-xl lg:text-2xl w-full text-black text-center whitespace-nowrap overflow-hidden text-ellipsis">{jersey.team}</h2>
             <h2 className="text-md sm:text-lg w-full text-black text-center whitespace-nowrap overflow-hidden text-ellipsis">

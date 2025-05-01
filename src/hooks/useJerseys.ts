@@ -18,7 +18,6 @@ export function useJerseys(setLocalCollection?: React.Dispatch<React.SetStateAct
     }
 
     const getJerseys = async (userId: string) => {
-        console.log("getting jerseys")
         const jerseysCol = collection(db, "users", userId, "jerseys")
         const jerseysSnapshot = await getDocs(jerseysCol)
         const jerseyList = jerseysSnapshot.docs.map((doc) => ({

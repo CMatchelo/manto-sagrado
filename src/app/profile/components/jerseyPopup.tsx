@@ -56,7 +56,7 @@ const JerseyPopup = ({ jersey }: JerseyPopupProps) => {
                         <PopupLine label="Número" text={jersey?.jerseyNumber} />
                         <PopupLine label="Ano de compra" text={jersey?.yearBought} />
                         <PopupLine label="Local de compra" text={jersey?.placeBought} />
-                        <PopupLine label="Preço" text={`R$: ${jersey?.price}`} />
+                        <PopupLine label="Preço de compra" text={`R$: ${jersey?.price}`} />
                         <PopupLine label="Esporte" text={jersey?.sport} />
                         <PopupLine label="Foco" text={jersey?.focus} />
                         <PopupLine label="Sub-foco" text={jersey?.subfocus} />
@@ -70,21 +70,3 @@ const JerseyPopup = ({ jersey }: JerseyPopupProps) => {
 }
 
 export default JerseyPopup
-
-/* 
-    country: string;
-    brand: string;
-    type?: string;
-    jerseyName?: string;
-    jerseyNumber?: number;
-    yearBought?: string;
-    placeBought?: string;
-    price?: number;
-    sport?: string;
-    focus?: string;
-    subfocus?: string;
-    details?: string
-    mainColor?: string;
-    secColor?: string;
-    photoFront?: string;
-    photoBack?: string; */

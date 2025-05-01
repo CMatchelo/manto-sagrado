@@ -33,13 +33,13 @@ const ImageSlide = ({ photoFront, photoBack }: ImageSlideProps) => {
                 <>
                     {showFirst ? (
                         <button onClick={() => setShowFirst(false)}
-                            className="absolute top-[50%] right-5 cursor-pointer bg-secondary-1/40 p-2 rounded-3xl flex justify-center items-center active:bg-secondary-1/60"
+                            className="absolute top-[50%] right-4 cursor-pointer bg-secondary-1/40 p-2 rounded-3xl flex justify-center items-center active:bg-secondary-1/60"
                         >
                             <NextIcon width={15} height={15} />
                         </button>
                     ) : (
                         <button onClick={() => setShowFirst(true)}
-                            className="absolute top-[50%] left-5 cursor-pointer bg-secondary-1/40 p-2 rounded-3xl flex justify-center items-center active:bg-secondary-1/60"
+                            className="absolute top-[50%] left-4 cursor-pointer bg-secondary-1/40 p-2 rounded-3xl flex justify-center items-center active:bg-secondary-1/60"
                         >
                             <BackIcon width={15} height={15} />
                         </button>

@@ -10,14 +10,11 @@ import { useParams } from "next/navigation";
 const ProfilePage = () => {
 
     const params = useParams();
-    console.log("params:", params);
     const [jerseyCollection, setJerseyCollection] = useState<JerseyType[]>([])
     const userid = params?.userid as string;
     const { getJerseys  } = useJerseys();
-    console.log("Getting:", userid)
 
     useEffect(() => {
-        console.log("Getting:", userid)
         const fetchJerseys = async () => {
             const jerseys = await getJerseys(userid)
             setJerseyCollection(jerseys)

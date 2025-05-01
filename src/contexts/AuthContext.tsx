@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("Uer change", user)
         const unsub = onAuthStateChanged(auth, (user) => {
             setUser(user)
             setLoading(false)
@@ -72,9 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const signInWithGoogle = async () => {
         try {
             const provider = new GoogleAuthProvider()
-            console.log("Aqui", auth, provider)
             const result = await signInWithPopup(auth, provider)
-            console.log(result)
             await updateProfile(result.user, {
                 displayName: result.user.displayName,
             });

@@ -5,12 +5,13 @@ import { useJerseyContext } from '@/contexts/JerseyContext';
 import JerseyCard from './jerseyCard';
 import JerseyPopup from './jerseyPopup';
 import { JerseyType } from '@/types/jerseyType';
+import Filter from './filter';
 
 interface JerseyTableProps {
-    collection: JerseyType[];
+  collection: JerseyType[];
 }
 
-const JerseyTable = ( { collection }: JerseyTableProps) => {
+const JerseyTable = ({ collection }: JerseyTableProps) => {
 
   const { jerseyCollection } = useJerseyContext()
   const [filtederCollection, setFilteredCollection] = useState<JerseyType[]>([])
@@ -29,7 +30,7 @@ const JerseyTable = ( { collection }: JerseyTableProps) => {
     setOpenPopup(true)
   };
 
-  const filterSearch = (term: string) => {
+  const termSearch = (term: string) => {
     term = term.toLowerCase()
     const arr = jerseyCollection.filter((jersey) => {
       const matchTeam = jersey.team.toLowerCase().includes(term)
@@ -44,13 +45,25 @@ const JerseyTable = ( { collection }: JerseyTableProps) => {
     setFilteredCollection(arr)
   }
 
+  const filterSearch = (filterArr: string[]) => {
+    if (filterArr.length === 0) {
+      setFilteredCollection(collection)
+      return
+    }
+    const arr = jerseyCollection.filter((jersey) => {
+      return filterArr.some((term) => jersey.focus?.includes(term))
+    })
+    setFilteredCollection(arr)
+  }
+
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div className='flex flex-col space-y-10 items-center justify-center mt-10 w-[90%] md:w-[75%]'>
+    <div className="min-h-screen flex flex-col items-center w-[90%] md:w-[75%]">
+      <div className='flex flex-col space-y-10 items-center justify-center mt-10 w-full'>
         <input
           className='bg-secondary-1 p-2 w-full rounded-sm border-1 border-terciary-1 shadow-md
           text-2xl text-terciary-1 placeholder:text-gray-400'
-          placeholder='Buscar...' onChange={(e) => filterSearch(e.target.value)}></input>
+          placeholder='Buscar...' onChange={(e) => termSearch(e.target.value)}></input>
+        <Filter jerseyCollection={jerseyCollection} filterSearch={filterSearch} />
         <div className='bg-transparent pb-10 mb-10
         grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {filtederCollection?.map((jersey: JerseyType, index: number): JSX.Element => (

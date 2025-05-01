@@ -18,8 +18,6 @@ const Header = () => {
     const { logout, user } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false)
 
-    console.log("USUARIO AQUAL", user)
-
     const goToRegister = () => {
         redirect('/newjersey');
     }

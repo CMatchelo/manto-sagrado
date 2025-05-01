@@ -16,10 +16,8 @@ const ImageSelector = ({ onImageChange, label, text }: ImageSelectorProps) => {
 
     const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            console.log(e.target.files[0]); // Tamanho em MB
             const file = e.target.files[0]
             const base64 = await compressImageViaCanvas(e.target.files[0]);
-            console.log(base64);
             if (!file.type.startsWith('image/')) {
                 alert("Seleciona um arquivo de imagem")
                 return

@@ -39,12 +39,12 @@ const Login = () => {
                 <button
                     onClick={signInWithGoogle}
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent 
+                    className="w-full flex justify-center space-x-2 py-2 px-4 border border-transparent 
                     rounded-md shadow-sm text-sm font-medium text-white cursor-pointer
                     bg-red-600 hover:bg-red-800 
                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                    Entre com sua conta Google <GoogleIcon width={20} height={20} />
+                    <span>Entrar com Google</span> <GoogleIcon width={20} height={20} />
                 </button>
             </div>
         )
