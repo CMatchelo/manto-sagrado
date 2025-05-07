@@ -51,20 +51,20 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
       return
     }
     const arr = jerseyCollection.filter((jersey) => {
-      return filterArr.some((term) => jersey.focus?.includes(term))
+      return filterArr.some((term) => jersey.focus?.includes(term) || jersey.country?.includes(term))
     })
     setFilteredCollection(arr)
   }
 
   return (
     <div className="min-h-screen flex flex-col items-center w-[90%] md:w-[75%]">
-      <div className='flex flex-col space-y-10 items-center justify-center mt-10 w-full'>
+      <div className='flex flex-col space-y-5 items-center justify-center mt-10 w-full'>
         <input
           className='bg-secondary-1 p-2 w-full rounded-sm border-1 border-terciary-1 shadow-md
           text-2xl text-terciary-1 placeholder:text-gray-400'
           placeholder='Buscar...' onChange={(e) => termSearch(e.target.value)}></input>
         <Filter jerseyCollection={jerseyCollection} filterSearch={filterSearch} />
-        <div className='bg-transparent pb-10 mb-10
+        <div className='bg-transparent mb-10
         grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {filtederCollection?.map((jersey: JerseyType, index: number): JSX.Element => (
             <JerseyCard jersey={jersey} key={index} onJerseyClick={handleCurrentJersey} />
@@ -77,7 +77,7 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
             className="absolute inset-0 bg-black/80 cursor-pointer z-20"
             onClick={() => setOpenPopup(false)}
           />
-          <JerseyPopup jersey={currentJersey} />
+          <JerseyPopup jersey={currentJersey} setPopup={setOpenPopup} />
         </div>
       )}
     </div>

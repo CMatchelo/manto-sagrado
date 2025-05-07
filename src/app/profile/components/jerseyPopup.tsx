@@ -5,6 +5,7 @@ import ImageSlide from "./imageSlide";
 
 interface JerseyPopupProps {
     jersey: JerseyType | undefined
+    setPopup: (status: boolean) => void
 }
 
 interface PopupLineProps {
@@ -29,18 +30,25 @@ const PopupLine = ({ label, text }: PopupLineProps) => {
     )
 }
 
-const JerseyPopup = ({ jersey }: JerseyPopupProps) => {
+const JerseyPopup = ({ jersey, setPopup }: JerseyPopupProps) => {
 
     return (
         <div className="z-30 w-[95%] md:w-[90%] flex justify-center max-w-4xl">
             {jersey && (
-                <div className="flex flex-col md:flex-row w-[90%] md:w-full h-150
-                    bg-white rounded-lg overflow-y-auto">
-                    <div className="flex flex-col w-full md:w-1/2 overflow-hidden p-5 relative">
-                        <ImageSlide photoFront={jersey.photoFront} photoBack={jersey.photoBack} />
+                <div className="flex flex-col md:flex-row w-[90%] md:w-full
+                    bg-white rounded-lg max-h-150 relative">
+                    <div className="text-black bg-secondary-1 border-1 border-black 
+                    w-8 h-8 p-2 rounded-full absolute -right-2 -top-3
+                    flex items-center justify-center cursor-pointer z-100"
+                    onClick={() => setPopup(false)}>
+                        X
+                    </div>
+                    <div className="flex flex-col w-full md:w-1/2 overflow-hidden p-5 relative h-[50%] md:h-[100%] ">
+                        <ImageSlide photoFront={jersey.photoFront} photoBack={jersey.photoBack} className="object-contain" />
                     </div>
                     <div className="flex flex-col w-full md:w-1/2 bg-secondary-1 
-                        rounded-ls shadow-xl p-5 text-terciary-1">
+                        rounded-ls shadow-xl p-5 text-terciary-1
+                        h-[50%] md:h-[100%] overflow-y-auto">
                         <div className="flex justify-center
                          text-4xl font-bold">
                             {jersey.team}
