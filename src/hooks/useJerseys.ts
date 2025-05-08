@@ -27,11 +27,11 @@ export function useJerseys(localCollection?: JerseyType[], setLocalCollection?: 
         if (setLocalCollection) {
             setLocalCollection(newArray)
         }
-        /* let userId = ''
+        let userId = ''
         if (user) userId = user?.uid
         if (!id) return
         const jerseyDoc = doc(db, "users", userId, "jerseys", id);
-        await deleteDoc(jerseyDoc) */
+        await deleteDoc(jerseyDoc)
     }
 
     const getJerseys = async (userId: string) => {
