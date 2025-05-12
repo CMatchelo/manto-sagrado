@@ -20,7 +20,7 @@ const ProfilePage = () => {
             setJerseyCollection(jerseys)
         }
         fetchJerseys()
-    }, [])
+    }, [getJerseys, userid])
 
 
     return (
