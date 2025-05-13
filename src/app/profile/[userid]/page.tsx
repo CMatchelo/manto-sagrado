@@ -24,10 +24,10 @@ const ProfilePage = () => {
 
 
     return (
-        <>
+        <div className="min-h-screen flex flex-col items-center">
             <Header />
             <JerseyTable collection={jerseyCollection} />
-        </>
+        </div>
     );
 }
 

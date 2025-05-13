@@ -38,7 +38,7 @@ const Filter = ({ jerseyCollection, filterSearch }: FilterProps) => {
     useEffect(() => {
         console.log(filter)
         filterSearch(filter)
-    }, [filter, filterSearch])
+    }, [filter])
 
     return (
         <div className="flex flex-col self-start w-full 
