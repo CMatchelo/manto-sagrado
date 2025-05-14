@@ -1,7 +1,7 @@
 'use client'
 
 import { User } from 'firebase/auth'
-import { addDoc, deleteDoc, collection, getDocs, doc, runTransaction, increment, decrement } from 'firebase/firestore';
+import { addDoc, deleteDoc, collection, getDocs, doc, runTransaction, increment } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { JerseyType } from '@/types/jerseyType';
 import { useAuth } from '@/contexts/AuthContext';
@@ -40,7 +40,7 @@ export function useJerseys(localCollection?: JerseyType[], setLocalCollection?: 
     const deleteJersey = async (id: string | undefined) => {
         console.log("Deleting", id)
         if (!user) throw new Error("Usuário não autenticado!");
-        let userId = user?.uid
+        const userId = user?.uid
         if (!id) return
         const jerseyDoc = doc(db, "users", userId, "jerseys", id);
         const userDocRef = doc(db, "users", userId);

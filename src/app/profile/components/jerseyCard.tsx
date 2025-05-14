@@ -36,24 +36,19 @@ const JerseyCard = ({ jersey, onJerseyClick }: JerseyCardProps) => {
         setDisplayDelete(false)
     }
 
-    // FIX - Move functions below as well as button to a component, avoiding rerendering
-
-    function shouldAllowDelete(pathname: string, params: any, user: any): boolean {
-        if (!user) return false;
-        if (pathname === '/profile') return true;
-        if (pathname.startsWith('/profile/') && params?.userId === user.uid) return true;
-        return false;
-    }
-
     useEffect(() => {
-        const allowed = shouldAllowDelete(pathname, params, user);
-        setCanDelete((prev) => {
-            if (prev !== allowed) return allowed;
-            return prev;
-        });
+        if (!user) return;
+        if (pathname === '/profile') {
+            setCanDelete(true);
+        }
+        else if (pathname.startsWith('/profile/') && params?.userId) {
+            if (params.userId === user.uid) {
+                setCanDelete(true);
+            } else {
+                setCanDelete(false);
+            }
+        }
     }, [pathname, params, user]);
-
-    // End fix
 
     const Btn = ({ onClick, variant = 'default', children }: BtnProps) => {
 
