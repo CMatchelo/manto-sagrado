@@ -19,8 +19,8 @@ const NewJersey = () => {
     const router = useRouter();
 
     const [jersey, setJersey] = useState<JerseyType>(createJersey())
-    const { setJerseyCollection } = useJerseyContext()
-    const { saveJersey } = useJerseys(setJerseyCollection)
+    const { setJerseyCollection, jerseyCollection } = useJerseyContext()
+    const { saveJersey } = useJerseys(jerseyCollection, setJerseyCollection)
     const [errorImg, setErrorImg] = useState<boolean>(false)
 
     useEffect(() => {

@@ -20,14 +20,14 @@ const ProfilePage = () => {
             setJerseyCollection(jerseys)
         }
         fetchJerseys()
-    }, [])
+    }, [getJerseys, userid])
 
 
     return (
-        <>
+        <div className="min-h-screen flex flex-col items-center">
             <Header />
             <JerseyTable collection={jerseyCollection} />
-        </>
+        </div>
     );
 }
 

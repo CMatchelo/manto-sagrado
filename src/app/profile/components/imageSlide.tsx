@@ -6,9 +6,10 @@ import { useState } from "react";
 interface ImageSlideProps {
     photoFront: string | undefined;
     photoBack?: string;
+    className?: string
 }
 
-const ImageSlide = ({ photoFront, photoBack }: ImageSlideProps) => {
+const ImageSlide = ({ photoFront, photoBack, className }: ImageSlideProps) => {
 
     const [showFirst, setShowFirst] = useState<boolean>(true)
 
@@ -20,11 +21,11 @@ const ImageSlide = ({ photoFront, photoBack }: ImageSlideProps) => {
                     ${showFirst ? 'translate-x-0' : '-translate-x-1/2'}`}
                 >
                     <div className="w-1/2 h-full">
-                        <img src={photoFront} alt="Camisa Frente" className="w-full h-full object-cover" />
+                        <img src={photoFront} alt="Camisa Frente" className={`w-full h-full ${className}`} />
                     </div>
                     {photoBack && (
                         <div className="w-1/2 h-full">
-                            <img src={photoBack} alt="Camisa Costas" className="w-full h-full object-cover" />
+                            <img src={photoBack} alt="Camisa Costas" className={`w-full h-full ${className}`} />
                         </div>
                     )}
                 </div>

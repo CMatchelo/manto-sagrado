@@ -15,6 +15,7 @@ export interface JerseyType {
     details?: string
     mainColor?: string;
     secColor?: string;
+    id?: string;
     photoFront?: string;
     photoBack?: string;
 }

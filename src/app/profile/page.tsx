@@ -19,6 +19,7 @@ const Profile = () => {
 
   useEffect(() => {
     setFilteredCollection(jerseyCollection)
+    console.log("Colecao filtrada", jerseyCollection)
   }, [jerseyCollection])
 
   useEffect(() => {
