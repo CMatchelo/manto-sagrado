@@ -1,7 +1,7 @@
 'use client'
 
 import { User } from 'firebase/auth'
-import { addDoc, deleteDoc, collection, getDocs, doc } from 'firebase/firestore';
+import { addDoc, deleteDoc, collection, getDocs, doc, runTransaction, increment } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { JerseyType } from '@/types/jerseyType';
 import { useAuth } from '@/contexts/AuthContext';
@@ -11,27 +11,56 @@ export function useJerseys(localCollection?: JerseyType[], setLocalCollection?: 
     const { user } = useAuth();
 
     const saveJersey = async (user: User | null, newJersey: JerseyType) => {
-        let userId = ''
-        if (user) userId = user?.uid
-        const userJerseysRef = collection(db, "users", userId, "jerseys")
-        await addDoc(userJerseysRef, newJersey)
+        if (!user) throw new Error("Usuário não autenticado!");
 
-        if (setLocalCollection) {
-            setLocalCollection((prev) => [...prev, newJersey])
+        const userId = user.uid;
+        const userJerseysRef = collection(db, "users", userId, "jerseys");
+        const userDocRef = doc(db, "users", userId);
+
+        try {
+            const jerseyRef = await runTransaction(db, async (transaction) => {
+                const jerseyDocRef = await addDoc(userJerseysRef, newJersey);
+                transaction.update(userDocRef, {
+                    jerseyCount: increment(1),
+                });
+                return jerseyDocRef;
+            });
+            const jerseyWithId = { ...newJersey, id: jerseyRef.id };
+            if (setLocalCollection) {
+                setLocalCollection((prev) => [...prev, jerseyWithId]);
+            }
+
+            console.log("Jersey criada e contador atualizado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao salvar jersey:", error);
+            throw error;
         }
-    }
+    };
 
     const deleteJersey = async (id: string | undefined) => {
-        console.log(localCollection)
+        console.log("Deleting", id)
+        if (!user) throw new Error("Usuário não autenticado!");
+        const userId = user?.uid
+        if (!id) return
+        const jerseyDoc = doc(db, "users", userId, "jerseys", id);
+        const userDocRef = doc(db, "users", userId);
+        /* Atualiza coleçao local */
         const newArray = localCollection?.filter(item => item.id !== id) || [];
         if (setLocalCollection) {
             setLocalCollection(newArray)
         }
-        let userId = ''
-        if (user) userId = user?.uid
-        if (!id) return
-        const jerseyDoc = doc(db, "users", userId, "jerseys", id);
-        await deleteDoc(jerseyDoc)
+        /* Atualiza coleçao firebase */
+        try {
+            await runTransaction(db, async (transaction) => {
+                await deleteDoc(jerseyDoc)
+                transaction.update(userDocRef, {
+                    jerseyCount: increment(-1)
+                })
+            })
+        } catch (err) {
+            console.error("Erro ao salvar jersey:", err);
+            throw err;
+        }
     }
 
     const getJerseys = async (userId: string) => {

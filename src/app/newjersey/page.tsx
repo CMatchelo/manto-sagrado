@@ -31,6 +31,7 @@ const NewJersey = () => {
 
     useEffect(() => {
         setMounted(true);
+        console.log("oi")
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -90,6 +91,7 @@ const NewJersey = () => {
                             name="season"
                             onChange={handleChange}
                             label="Temporada"
+                            required
                         />
                         <Input
                             value={jersey.country}
@@ -143,6 +145,7 @@ const NewJersey = () => {
                             name="yearBought"
                             onChange={handleChange}
                             label="Ano de compra"
+                            type="number"
                         />
                         <Input
                             value={jersey.placeBought}
