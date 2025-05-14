@@ -36,7 +36,6 @@ const Filter = ({ jerseyCollection, filterSearch }: FilterProps) => {
     }
 
     useEffect(() => {
-        console.log(filter)
         filterSearch(filter)
     }, [filter])
 
