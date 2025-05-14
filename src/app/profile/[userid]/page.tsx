@@ -10,9 +10,14 @@ import { useParams } from "next/navigation";
 const ProfilePage = () => {
 
     const params = useParams();
+    const [filtederCollection, setFilteredCollection] = useState<JerseyType[]>([])
     const [jerseyCollection, setJerseyCollection] = useState<JerseyType[]>([])
     const userid = params?.userid as string;
-    const { getJerseys  } = useJerseys();
+    const { getJerseys } = useJerseys();
+
+    useEffect(() => {
+        setFilteredCollection(jerseyCollection)
+    }, [jerseyCollection])
 
     useEffect(() => {
         const fetchJerseys = async () => {
@@ -26,7 +31,7 @@ const ProfilePage = () => {
     return (
         <div className="min-h-screen flex flex-col items-center">
             <Header />
-            <JerseyTable collection={jerseyCollection} />
+            <JerseyTable collection={filtederCollection} />
         </div>
     );
 }

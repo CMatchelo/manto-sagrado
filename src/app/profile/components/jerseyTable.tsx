@@ -1,7 +1,6 @@
 'use client';
 
 import { JSX, useEffect, useState } from 'react';
-import { useJerseyContext } from '@/contexts/JerseyContext';
 import JerseyCard from './jerseyCard';
 import JerseyPopup from './jerseyPopup';
 import { JerseyType } from '@/types/jerseyType';
@@ -13,7 +12,6 @@ interface JerseyTableProps {
 
 const JerseyTable = ({ collection }: JerseyTableProps) => {
 
-  const { jerseyCollection } = useJerseyContext()
   const [filtederCollection, setFilteredCollection] = useState<JerseyType[]>([])
   const [currentJersey, setCurrentJersey] = useState<JerseyType>()
   const [openPopup, setOpenPopup] = useState<boolean>(false)
@@ -22,7 +20,7 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
     setFilteredCollection(collection)
   }, [collection])
 
-  if (!jerseyCollection) return <div>Carregando...</div>;
+  if (!collection) return <div>Carregando...</div>;
 
 
   const handleCurrentJersey = (jersey: JerseyType) => {
@@ -32,7 +30,7 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
 
   const termSearch = (term: string) => {
     term = term.toLowerCase()
-    const arr = jerseyCollection.filter((jersey) => {
+    const arr = collection.filter((jersey) => {
       const matchTeam = jersey.team.toLowerCase().includes(term)
       const matchSeason = jersey.season?.includes(term)
       const matchColor = jersey.mainColor?.toLowerCase().includes(term)
@@ -46,11 +44,12 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
   }
 
   const filterSearch = (filterArr: string[]) => {
+    
     if (filterArr.length === 0) {
       setFilteredCollection(collection)
       return
     }
-    const arr = jerseyCollection.filter((jersey) => {
+    const arr = collection.filter((jersey) => {
       return filterArr.some((term) => jersey.focus?.includes(term) || jersey.country?.includes(term))
     })
     setFilteredCollection(arr)
@@ -63,7 +62,7 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
           className='bg-secondary-1 p-2 w-full rounded-sm border-1 border-terciary-1 shadow-md
           text-2xl text-terciary-1 placeholder:text-gray-400'
           placeholder='Buscar... (Time, Pais, Foco, Cor, Temporada, etc)' onChange={(e) => termSearch(e.target.value)}></input>
-        <Filter jerseyCollection={jerseyCollection} filterSearch={filterSearch} />
+        <Filter jerseyCollection={collection} filterSearch={filterSearch} />
         <div className='bg-transparent mb-10
         grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {filtederCollection?.map((jersey: JerseyType, index: number): JSX.Element => (
