@@ -31,7 +31,6 @@ const NewJersey = () => {
 
     useEffect(() => {
         setMounted(true);
-        console.log("oi")
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {

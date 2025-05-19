@@ -29,8 +29,6 @@ export function useJerseys(localCollection?: JerseyType[], setLocalCollection?: 
             if (setLocalCollection) {
                 setLocalCollection((prev) => [...prev, jerseyWithId]);
             }
-
-            console.log("Jersey criada e contador atualizado com sucesso!");
         } catch (error) {
             console.error("Erro ao salvar jersey:", error);
             throw error;
@@ -38,7 +36,6 @@ export function useJerseys(localCollection?: JerseyType[], setLocalCollection?: 
     };
 
     const deleteJersey = async (id: string | undefined) => {
-        console.log("Deleting", id)
         if (!user) throw new Error("Usuário não autenticado!");
         const userId = user?.uid
         if (!id) return

@@ -61,10 +61,10 @@ const JerseyTable = ({ collection }: JerseyTableProps) => {
         <input
           className='bg-secondary-1 p-2 w-full rounded-sm border-1 border-terciary-1 shadow-md
           text-2xl text-terciary-1 placeholder:text-gray-400'
-          placeholder='Buscar... (Time, Pais, Foco, Cor, Temporada, etc)' onChange={(e) => termSearch(e.target.value)}></input>
+          placeholder='Buscar...' onChange={(e) => termSearch(e.target.value)}></input>
         <Filter jerseyCollection={collection} filterSearch={filterSearch} />
         <div className='bg-transparent mb-10
-        grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+        grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {filtederCollection?.map((jersey: JerseyType, index: number): JSX.Element => (
             <JerseyCard jersey={jersey} key={index} onJerseyClick={handleCurrentJersey} />
           ))}
