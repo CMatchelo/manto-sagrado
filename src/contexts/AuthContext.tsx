@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 email,
                 name,
                 createdAt: new Date(),
-            });
+            }, { merge: true });
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
                 const errString = getFriendlyErrorMessage(err.code)
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 email: result.user.email,
                 name: result.user.displayName,
                 createdAt: new Date(),
-            });
+            }, { merge: true });
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
                 const errString = getFriendlyErrorMessage(err.code)
